@@ -1,0 +1,64 @@
+contract:
+  version: "1.0"
+  input_format: "NCTHW"
+  channels: ["T_raw", "T_smooth", "DeltaT"]
+  allowed_T: [16, 32]
+  H: 112
+  W: 112
+  output: "logits[B,1]"
+
+data:
+  root_dir: "./data"
+  train_list: "./data/train.txt"
+  val_list: "./data/val.txt"
+  num_workers: 2
+  pin_memory: true
+
+clip:
+  T: 16
+  fps: 8
+  decode_backend: "opencv"
+  smooth_window: 5
+  deltaT_baseline: "first_frame"
+
+preprocess:
+  normalize:
+    enabled: true
+    mean: [0.0, 0.0, 0.0]
+    std:  [1.0, 1.0, 1.0]
+  clamp:
+    enabled: false
+    min: -10.0
+    max: 10.0
+
+model:
+  name: "tsm_mobilenetv2"
+  width_mult: 1.0
+  tsm:
+    enabled: true
+    n_div: 8
+    mode: "shift"
+  dropout: 0.2
+
+train:
+  device: "cuda"
+  batch_size: 16
+  epochs: 1
+  lr: 0.0005
+  weight_decay: 0.0001
+  amp: true
+  grad_clip_norm: 1.0
+  log_every: 20
+  eval_every: 1
+  seed: 42
+
+optim:
+  name: "adamw"
+  betas: [0.9, 0.999]
+
+scheduler:
+  name: "cosine"
+  warmup_epochs: 0
+  min_lr: 0.000001
+
+output_dir: "./runs/smoke"
