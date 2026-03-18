@@ -1,10 +1,6 @@
 # Thermal Infiltration Detection
 ### Early Detection of Peripheral IV Infiltration/Extravasation via Thermal Video Analysis
 
-> **TÜBİTAK 2209-B Project** — Muğla Sıtkı Koçman University  
-> Applicant: Kamal Mahmud Ibrahim Alqedra  
-> Academic Advisor: Dr. Öğr. Üy. Şengül Dolu Kübilay  
-> Industry Advisor: Doç. Dr. Tuğba Önal Süzek
 
 ---
 
@@ -16,13 +12,13 @@ This project develops a **mobile, non-contact, real-time early warning system** 
 
 **Target metrics (from proposal):**
 
-| Metric | Target |
-|---|---|
-| AUC | ≥ 0.85 |
-| False alarms per hour (FA/h) | ≤ 0.30 |
-| Mean early detection time | ≥ 2 minutes before visual signs |
-| End-to-end inference latency | ≤ 2 seconds |
-| Model size (after INT8 quantization) | ≤ 10 MB |
+| Metric                               | Target                          |
+|--------------------------------------|---------------------------------|
+| AUC                                  | ≥ 0.85                          |
+| False alarms per hour (FA/h)         | ≤ 0.30                          |
+| Mean early detection time            | ≥ 2 minutes before visual signs |
+| End-to-end inference latency         | ≤ 2 seconds                     |
+| Model size (after INT8 quantization) | ≤ 10 MB                         |
 
 ---
 
@@ -32,11 +28,11 @@ During normal IV infusion, cold IV fluid flows inside the vein and appears as a 
 
 Three thermographic patterns are clinically relevant:
 
-| Pattern | Thermal signature | Label |
-|---|---|---|
-| Normal infusion | Narrow cool streak along vein path | Negative |
-| Extravasation | Fan-shaped cold spread from puncture site | **Positive** |
-| Vein bifurcation | V-shaped cold area at vein fork | Negative (hard) |
+| Pattern          | Thermal signature                         | Label           |
+|------------------|-------------------------------------------|-----------------|
+| Normal infusion  | Narrow cool streak along vein path        | Negative        |
+| Extravasation    | Fan-shaped cold spread from puncture site | **Positive**    |
+| Vein bifurcation | V-shaped cold area at vein fork           | Negative (hard) |
 
 The bifurcation pattern is the primary source of false positives — it resembles extravasation spatially but is a normal anatomical variant. Temporal analysis across frames is key to distinguishing the two.
 
@@ -176,18 +172,18 @@ python train.py \
 
 ### Arguments
 
-| Argument | Default | Description |
-|---|---|---|
-| `--epochs` | 50 | Maximum training epochs |
-| `--patience` | 10 | Early stopping patience |
-| `--batch-size` | 8 | Batch size |
-| `--n-train` | 800 | Synthetic training samples |
-| `--n-val` | 200 | Synthetic validation samples |
-| `--pos-ratio` | 0.2 | Fraction of positive clips |
-| `--lr` | 1e-3 | AdamW learning rate |
-| `--weight-decay` | 1e-4 | AdamW weight decay |
-| `--device` | auto | `cuda` or `cpu` |
-| `--save-path` | best_model.pth | Where to save best weights |
+| Argument         | Default        | Description                  |
+|------------------|----------------|------------------------------|
+| `--epochs`       | 50             | Maximum training epochs      |
+| `--patience`     | 10             | Early stopping patience      |
+| `--batch-size`   | 8              | Batch size                   |
+| `--n-train`      | 800            | Synthetic training samples   |
+| `--n-val`        | 200            | Synthetic validation samples |
+| `--pos-ratio`    | 0.2            | Fraction of positive clips   |
+| `--lr`           | 1e-3           | AdamW learning rate          |
+| `--weight-decay` | 1e-4           | AdamW weight decay           |
+| `--device`       | auto           | `cuda` or `cpu`              |
+| `--save-path`    | best_model.pth | Where to save best weights   |
 
 ---
 
@@ -276,16 +272,6 @@ Output:
 MIT License — model weights, code, and SOP documents are freely usable for research and commercial development without restriction.
 
 ---
-
-## Citation
-
-If you use this work, please cite:
-
-```
-Alqedra, K.M.I. (2025). Early Detection of Peripheral IV Infiltration/Extravasation
-via Smartphone Thermal Camera and Deep Learning.
-TÜBİTAK 2209-B Project, Muğla Sıtkı Koçman University.
-```
 
 **Key references this work builds on:**
 
