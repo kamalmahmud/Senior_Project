@@ -1,0 +1,3 @@
+H, W, T_LEN = 56, 56, 16
+PUNCT_X, PUNCT_Y = 28, 38
+VEIN_ANGLE = -0.42
